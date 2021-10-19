@@ -1,6 +1,6 @@
 import re
 
-from program.LanguageSymbols import operators, separators
+from domain.LanguageSymbols import operators, separators
 
 
 class Scanner:
