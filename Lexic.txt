@@ -60,7 +60,7 @@ Alphabet:
         factor ::= "(" expression ")" | identifier
         iostmt ::= "read"  "(" identifier ")" | "write" "(" identifier ")"
         structstmt ::= cmpdstmt | ifstmt | whilestmt
-        ifstmt ::= "if" condition "then" stmt |"if" condition "then" stmt "else" stmt
+        ifstmt ::= "if" condition stmt ["else" stmt]
         whilestmt ::= "while" condition "do" stmt
         condition ::=  "(" expression relation expression ")"
         relation ::= "<" | "<=" | "=" | "<>" | ">=" | ">"

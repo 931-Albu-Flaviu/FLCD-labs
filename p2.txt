@@ -12,9 +12,9 @@ begin{
       }
       }
    if(ok==1){
-    write(prime);
+    write('prime');
    }
  else{
-     write(not prime);
+     write('not prime');
  }
 }

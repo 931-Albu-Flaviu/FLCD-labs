@@ -5,7 +5,7 @@ from domain.PIF import ProgramInternalForm
 class Main:
 
     def __init__(self):
-        self.st = ST(17)
+        self.st = ST(20)
         self.pif = ProgramInternalForm()
         self.scanner = Scanner()
 
