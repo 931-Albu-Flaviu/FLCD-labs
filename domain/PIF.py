@@ -1,9 +1,12 @@
 class ProgramInternalForm:
     def __init__(self):
-        self.pif = []
+        self.__content = []
 
-    def add(self, token, st_position):
-        self.pif.append((token, st_position))
+    def add(self, token, pos):
+        self.__content.append((token, pos))
 
     def __str__(self):
-        return str(self.pif)
+        result = ""
+        for pair in self.__content:
+            result += pair[0] + "->" + str(pair[1]) + "\n"
+        return result

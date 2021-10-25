@@ -1,94 +1,160 @@
 Alphabet:
-    a. [A-Za-z]
-    b. [0-9]
-    c. Underscore ('_')
-    d. All characters which are used in operators, separators etc (<,=,{ a.s.o.)
-Lexic:
+    a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
+
+    b. Underline character '_';
+
+    c. Decimal digits (0-9);
+
+    1.Lexic:
     a.Special symbols, representing:
-        - operators: + - * / = < <= = >= == >> << [ ] ! != and or xor
-        - separators { } ( ) . , : ; <space>
-        - reserved words:
-         number, array, std::cin, std::cout, if, else, for, while, go, string
-    b.identifiers
-         -a sequence of letters and digits, such that the first character is a letter, and intertwining is
-        allowed (I.e. a2a,ba3a)
-        identifier = letter {letter|digit}
-        letter = capital_letter | small_letter
-        capital_letter = "A" | "B" | . ..| "Z"
-        small_letter = "a" | "b" | ... | "z"
-        digit = "0" | non_zero_digit
-        non_zero_digit = "1" | ... | "9"
-    c.constants
-        1.integer - rule: doesn't allow things like -0, 001 etc
-          noconst::=[(+|-)] non_zero_number|"0"
+    -operators +-*/:= < <= = >=
+    -separators ;
+    -reserved words:
+        array char const do else if int of program read write then var while
+
+    b.Identifiers
+
+    -a sequence of letters and digits, such that the first character is a letter; the rule is:
+
+        identifier::=letter|letter{letter}{digit}
+
+        letter ::= "A" | "B" | . ..| "Z"
+
+        digit ::= "0" | "1" |...| "9"
+
+    c.Constants
+        1. integer-rule:
+            noconst::=[(+|-)] non_zero_number|"0"
             non_zero_digit::="1"|"2"|....|"9"
             non_zero_number::=non_zero_digit{no}
             no::=digit{no}
-        2.character
-             character=”letter”|”digit”
-        3.string
-             string=’{letter|digit}’
-            CONSTANT = integer | character | string
-Tokens list
-(
-)
-[
-]
-{
-}
-;
-:
-<space>
-.
-,
-+
--
-*
-/
-=
-<
->
-<=
->=
-==
-!=
-!
->>
-<<
-and
-array
-else
-for
-go
-if
-number
-or
-std::cin
-std::cout
-string
-while
-xor
 
-Syntax
-    program = "go" cmpdstmt
-    declaration = type " " IDENTIFIER
-    simpletype = "number" | "string"
-    arraydecl = simpletype " " "array" "[" integer "]"
-    type = simpletype|arraydecl
-    cmpdstmt = "{" stmtlist "}"
-    stmtlist = stmt | stmt ";" stmtlist
-    stmt = simplstmt | structstmt
-    simplstmt = (assignstmt | iostmt | declaration) “;”
-    structstmt = cmpdstmt | ifstmt | whilestmt | forstmt
-    ifstmt = "if" condition stmt ["else" stmt]
-    forstmt = "for" forheader stmt
-    forheader = "(" "number" assignstmt ";" condition ";" assignstmt ")"
-    whilestmt = "while" condition stmt
-    assignstmt = IDENTIFIER "=" expression
-    expression = [expression("+"|"-")] term
-    term = term("*" | "/") factor | factor
-    factor = "(" expression ")" | int | IDENTIFIER | Indexedidentifier
-    Indexedidentifier = IDENTIFIER “[“ integer “]”
-    iostmt = ("std::cin" ">>" IDENTIFIER) | ("std::cout" "<<" (IDENTIFIER | CONSTANT))
-    condition = "(" expression RELATION expression ")"
-    RELATION = "<" | "<=" | "==" | "!=" | ">=" | ">"
+        2.character
+
+            character::='letter'|'digit'
+
+        3.string
+
+            constchar::="string"
+
+            string::=character{string}
+
+            character:=letter|digit
+
+    1.Syntax:
+
+        identifier::=letter|letter{letter}{digit}
+        program::"Declare variables" decllist ";" cmpdstmt"."
+        decllist ::= declaration | declaration ";" decllist
+        declaration ::= lidentifier ":" type
+        type::= "int"| "string"
+        lidentifier::= id| id ","  lidentifier;
+        arraydeclarations::="array" "[" nr "]" ":" type
+        cmpdstmt = "{" stmtlist "}"
+        stmtlist ::= stmt | stmt ";" stmtlist
+        stmt ::= simplstmt | structstmt
+        simplstmt ::= assignstmt | iostmt
+        assignstmt ::= identifier ":=" expression
+        expression ::= expression "+" term | expression "-" term |term
+        term ::= term "*" factor | factor
+        factor ::= "(" expression ")" | identifier
+        iostmt ::= "read"  "(" identifier ")" | "write" "(" identifier ")"
+        structstmt ::= cmpdstmt | ifstmt | whilestmt
+        ifstmt ::= "if" condition "then" stmt |"if" condition "then" stmt "else" stmt
+        whilestmt ::= "while" condition "do" stmt
+        condition ::=  "(" expression relation expression ")"
+        relation ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+
+ p1. Max of 3 numbers
+
+begin{
+   number a;
+   number b;
+   number c;
+   number max;
+   read(a);
+   read(b);
+   read(c)
+   if(a>b){
+      if(a>c){
+          max=a;
+          }
+          }
+   else{
+      if(b>a){
+          if(b>c){
+           max=b;
+           }}}
+   else{
+       if(c>a){
+          if(c>b){
+           max=c;
+           }}}
+   write(max);
+   }
+
+p3. sum of positive numbers
+
+begin{
+   number array[10] arr;
+   number size;
+   number sum;
+   read(size);
+   sum=0;
+
+   Ps. am reusit pana aici sa refac programele
+   for(i=0;i<size;i=i+1){
+       read arr[i];
+       if(arr[i]>0){
+       sum= sum+arr[i];
+       }
+       }
+
+  print(sum);
+  }
+
+
+p1eror. Max of 3 numbers the lexical error is at number a=$
+
+begin{
+   number 5$a;
+   number b;
+   number c;
+   number max;
+   read(a);
+   read(b);
+   read(c)
+   if(a>b){
+      if(a>c){
+          max=a;
+          }
+          }
+   else{
+      if(b>a){
+          if(b>c){
+           max=b;
+           }}}
+   else{
+       if(c>a){
+          if(c>b){
+           max=c;
+           }}}
+   write(max);
+   }
+p2: check if a number is prime
+
+begin{
+ number n;
+ read n;
+ number ok;
+ ok=1;
+ if(n<2 or n>2 and n%2==0){
+       ok=0;
+}
+ for(d=3;d*d<=n;d=d+2){
+      if(n%d==0) ok=0;
+}
+
+  if(ok==1) print prime;
+ else print not prime;
+

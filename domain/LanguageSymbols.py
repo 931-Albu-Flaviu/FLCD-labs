@@ -11,7 +11,7 @@ def readFile():
             if separator == "<space>":
                 separator = " "
             separators.append(separator)
-        for i in range(14):
+        for i in range(13):
             operators.append(f.readline().strip())
         for i in range(13):
             reservedWords.append(f.readline().strip())

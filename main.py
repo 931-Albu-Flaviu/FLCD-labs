@@ -1,17 +1,58 @@
+from domain.Scanner import *
+from domain.SymbolTable import ST
+from domain.PIF import ProgramInternalForm
 
-# This is a sample Python script.
+class Main:
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+    def __init__(self):
+        self.st = ST(17)
+        self.pif = ProgramInternalForm()
+        self.scanner = Scanner()
+
+    def run(self):
+        readFile()
+        fileName = "p2.txt"
+        exceptionMessage = ""
+
+        with open(fileName, 'r') as file:
+            lineCounter = 0
+            for line in file:
+                lineCounter += 1
+                tokens = self.scanner.tokenize(line.strip())
+                extra=''
+                for i in range(len(tokens)):
+                    if tokens[i] in reservedWords+separators+operators:
+                        if tokens[i] == ' ': # ignore adding spaces to the pif
+                            continue
+                        self.pif.add(tokens[i], (-1, -1))
+                    elif tokens[i] in self.scanner.cases and i<len(tokens)-1:
+                        if re.match("[1-9]", tokens[i+1]):
+                            self.pif.add(tokens[i][:-1], (-1, -1))
+                            extra = tokens[i][-1]
+                            continue
+                        else:
+                            exceptionMessage += 'Lexical error at token ' + tokens[i] + ', at line ' + str(lineCounter) + "\n"
+                    elif self.scanner.isIdentifier(tokens[i]):
+                        id = self.st.add(tokens[i])
+                        self.pif.add("id", id)
+                    elif self.scanner.isConstant(tokens[i]):
+                        const = self.st.add(extra+tokens[i])
+                        extra = ''
+                        self.pif.add("const", const)
+                    else:
+                        exceptionMessage += 'Lexical error at token ' + tokens[i] + ', at line ' + str(lineCounter) + "\n"
+
+        with open('st.out', 'w') as writer:
+            writer.write(str(self.st))
+
+        with open('pif.out', 'w') as writer:
+            writer.write(str(self.pif))
+
+        if exceptionMessage == '':
+            print("Lexically correct")
+        else:
+            print(exceptionMessage)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+main = Main()
+main.run()

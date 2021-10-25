@@ -1,0 +1,20 @@
+begin{
+   number n;
+   read(n);
+   number ok;
+   ok=1;
+   if(n<2 or n>2 and n%2==0){
+       ok=0;
+   }
+   for(d=3;d*d<=n;d=d+2){
+      if(n%d==0) {
+      ok=0;
+      }
+      }
+   if(ok==1){
+    write(prime);
+   }
+ else{
+     write(not prime);
+ }
+}

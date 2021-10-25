@@ -1,6 +1,6 @@
 import re
 
-from domain.LanguageSymbols import operators, separators
+from domain.LanguageSymbols import *
 
 
 class Scanner:
@@ -43,10 +43,35 @@ class Scanner:
             if self.isPartOfOperator(line[index]):
                 if token:
                     tokens.append(token)
+                token, index = self.getOperatorToken(line, index)
+                tokens.append(token)
+                token = ''  # reset token
 
+            elif line[index] == '\'':
+                if token:
+                    tokens.append(token)
+                token, index = self.getStringToken(line, index)
+                tokens.append(token)
+                token = ''  # reset token
+
+            elif line[index] in separators:
+                if token:
+                    tokens.append(token)
+                token, index = line[index], index + 1
+                tokens.append(token)
+                token = ''  # reset token
+
+            else:
+                token += line[index]
+                index += 1
         if token:
             tokens.append(token)
         return tokens
 
+    def isIdentifier(self, token):
+        return re.match(r'^[a-z]([a-zA-Z]|[0-9])*$', token) is not None
+    #trebuie sa inceapa cu litera mica dupa poate fi urmat de a-zA-Z sau 0-9 de mai multe ori
 
-print("it works")
+    def isConstant(self, token):
+        return re.match(r'^(0|[+-]?[1-9][0-9]*)$|^\'.\'$|^\'.*\'$', token) is not None
+    #
