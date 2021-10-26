@@ -1,18 +1,18 @@
-Symbol Table (kept as a Hash Table using LinkedLists)
-0->deque(['0'])
-1->deque(['1', 'd', "'not prime'"])
-2->deque(['2'])
-3->deque(['ok', '3'])
-4->deque([])
-5->deque([])
-6->deque([])
-7->deque([])
-8->deque([])
-9->deque([])
-10->deque([])
-11->deque(['n', "'prime'"])
-12->deque([])
-13->deque([])
-14->deque([])
-15->deque([])
-16->deque([])
+Symbol Table (kept as a Hash Table using Lists)
+0->['c']
+1->[]
+2->[]
+3->[]
+4->[]
+5->[]
+6->[]
+7->[]
+8->[]
+9->[]
+10->[]
+11->[]
+12->['max']
+13->[]
+14->[]
+15->['a']
+16->['b']

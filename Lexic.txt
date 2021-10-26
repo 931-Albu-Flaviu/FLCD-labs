@@ -34,17 +34,12 @@ Alphabet:
             character::='letter'|'digit'
 
         3.string
-
-            constchar::="string"
-
-            string::=character{string}
-
-            character:=letter|digit
+            string::="""{character}"""
 
     1.Syntax:
 
         identifier::=letter|letter{letter}{digit}
-        program::"Declare variables" decllist ";" cmpdstmt"."
+        program::"Begin" cmpdstmt
         decllist ::= declaration | declaration ";" decllist
         declaration ::= lidentifier ":" type
         type::= "int"| "string"

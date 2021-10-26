@@ -5,13 +5,13 @@ from domain.PIF import ProgramInternalForm
 class Main:
 
     def __init__(self):
-        self.st = ST(20)
+        self.st = ST(17)
         self.pif = ProgramInternalForm()
         self.scanner = Scanner()
 
     def run(self):
         readFile()
-        fileName = "p2.txt"
+        fileName = "p1err.txt"
         exceptionMessage = ""
 
         with open(fileName, 'r') as file:
