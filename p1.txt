@@ -1,6 +1,7 @@
 
 begin{
    number a;
+
    number b;
    number c;
    number max;

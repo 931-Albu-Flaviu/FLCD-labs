@@ -1,7 +1,14 @@
+
+a=-5-7
 begin{
-   number 5$a;
+   number a;
    number b;
    number c;
+
+   a="aaa";
+   a="a";
+   a='a';
+   a="qqqq";
    number max;
    read(a);
    read(b);
