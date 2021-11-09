@@ -1,0 +1,19 @@
+Fa Documentation
+How to write the input file for FiniteAutomaton
+
+EBNF
+
+letter="A" | "B" | . ..| "Z"
+digit="0" | "1" |...| "9"
+operator="-"|"+"
+separator=" "
+character='letter'|'digit'|operator;
+states="states",{separator,letter};
+alphabet="alphabet",{separator, character}
+transitions="transitions",{separator, transition}
+transition=letter,",",character,",",letter
+initial state="initialState",{separator,letter}
+final state="finalState",{separator,letter}
+
+file=states, newline, alphabet,newline,transtions,newline,
+     initial state,newline,final state
