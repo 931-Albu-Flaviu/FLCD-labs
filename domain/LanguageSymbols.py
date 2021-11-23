@@ -1,6 +1,7 @@
 reservedWords = []
 separators = []
 operators = []
+symbols=[]
 
 
 def readFile():
