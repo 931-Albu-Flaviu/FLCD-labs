@@ -2,6 +2,11 @@ from domain.Scanner import *
 from domain.SymbolTable import ST
 from domain.PIF import ProgramInternalForm
 
+
+from parser1.grammar import Grammar
+from parser1.parser import ParserRecursiveDescendant
+
+
 class Main:
 
     def __init__(self):
@@ -9,9 +14,9 @@ class Main:
         self.pif = ProgramInternalForm()
         self.scanner = Scanner()
 
-    def run(self):
+    def run(self,fileName):
         readFile()
-        fileName = "p1err.txt"
+
         exceptionMessage = ""
 
         with open(fileName, 'r') as file:
@@ -34,11 +39,11 @@ class Main:
                             exceptionMessage += 'Lexical error at token ' + tokens[i] + ', at line ' + str(lineCounter) + "\n"
                     elif self.scanner.isIdentifier(tokens[i]):
                         id = self.st.add(tokens[i])
-                        self.pif.add("id", id)
+                        self.pif.add("identifier", id)
                     elif self.scanner.isConstant(tokens[i]):
                         const = self.st.add(extra+tokens[i])
                         extra = ''
-                        self.pif.add("const", const)
+                        self.pif.add("constant", const)
                     else:
                         exceptionMessage += 'Lexical error at token ' + tokens[i] + ', at line ' + str(lineCounter) + "\n"
 
@@ -55,4 +60,13 @@ class Main:
 
 
 main = Main()
-main.run()
+main.run("p1.txt")
+grammar= Grammar.parseFile("g2.txt")
+sequence=[]
+for e in main.pif.get_content():
+    sequence.append(str(e[0]))
+parser=ParserRecursiveDescendant(grammar)
+parser.run(sequence)
+parser.parse_tree(parser.work)
+parser.write_tree_to_file("g2.out")
+

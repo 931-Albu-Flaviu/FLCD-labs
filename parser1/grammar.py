@@ -15,11 +15,11 @@ class Grammar:
         self.starting_symbol = starting_symbol
 
     @staticmethod
-    def parseFile(self, filename):
+    def parseFile(filename):
         with open(filename, "r") as file:
             with open(filename, "r") as file:
-                non_terminals = set([nt.strip() for nt in file.readline().strip().split(',')])
-                terminals = set([nt.strip() for nt in file.readline().strip().split(',')])
+                non_terminals = set([nt.strip() for nt in file.readline().strip().split(' ')])
+                terminals = set([nt.strip() for nt in file.readline().strip().split(' ')])
                 starting_symbol = file.readline().strip()
                 productions = {}
                 for line in file:
@@ -36,13 +36,17 @@ class Grammar:
                 return Grammar(non_terminals, terminals, productions, starting_symbol)
 
     def getNonTerminals(self):
-        return self.non_terminals
+        return list(self.non_terminals)
 
     def getTerminals(self):
-        return self.terminals
+        return list(self.terminals)
 
     def getProductions(self):
-        return self.productions
+        new_dict = {}
+        for x in self.productions.keys():
+            new_dict[x] = list(self.productions[x])
+        return new_dict
+
 
     def getStartingSymbol(self):
         return self.starting_symbol

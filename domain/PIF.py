@@ -5,6 +5,9 @@ class ProgramInternalForm:
     def add(self, token, pos):
         self.__content.append((token, pos))
 
+    def get_content(self):
+        return self.__content
+
     def __str__(self):
         result = ""
         for pair in self.__content:

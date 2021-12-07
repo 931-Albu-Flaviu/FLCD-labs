@@ -50,8 +50,8 @@ Alphabet:
         stmt ::= simplstmt | structstmt
         simplstmt ::= assignstmt | iostmt
         assignstmt ::= identifier ":=" expression
-        expression ::= expression "+" term | expression "-" term |term
-        term ::= term "*" factor | factor
+        expression ::= term |expression operation term
+        term ::= identifier | constant
         factor ::= "(" expression ")" | identifier
         iostmt ::= "read"  "(" identifier ")" | "write" "(" identifier ")"
         structstmt ::= cmpdstmt | ifstmt | whilestmt

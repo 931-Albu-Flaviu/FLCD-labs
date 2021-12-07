@@ -1,0 +1,20 @@
+program decllist declaration type operation lidentifier structstmt arraydeclarations cmpdstmt stmtlist stmt ifstmt simplstmt expression term factor iostmt whilestmt condition relation
+identifier constant Begin ( ) do id [ ] { } ; : \  := <space> . , + - * / % = < <> > <= >= == != ! and array else for begin if number or read write string while xor int
+program
+program -> Begin cmpdstmt
+cmpdstmt -> { stmtlist }
+stmtlist -> stmt | stmt ; stmtlist
+stmt -> simplstmt | structstmt
+structstmt -> cmpdstmt | ifstmt | whilestmt
+ifstmt -> if condition stmt [ else stmt ]
+whilestmt -> while condition do stmt
+condition ->  ( expression relation expression )
+relation -> < | <= | = | <> | >= | >
+decllist -> declaration | declaration ; decllist
+declaration ->  lidentifier : type
+type -> int | string
+lidentifier -> id| id , lidentifier
+arraydeclarations -> array [ constant ] : type
+assignstmt -> identifier := expression
+expression -> term | expression operation term
+operation -> + | - | * | \ | %
